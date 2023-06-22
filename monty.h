@@ -36,7 +36,11 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-#define DELIMS " \t\n"
+#define DELIMS " \t\n\a\b"
+#define STACK 0
+#define QUEUE 1
+
+extern char **op_toks;
 
 void free_stack(stack_t **stack);
 int init_stack(stack_t **stack);
