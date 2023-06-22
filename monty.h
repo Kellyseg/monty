@@ -4,13 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-#define STACK 0
-#define QUEUE 1
-#define DELIMS " \n\t\a\b"
-
-/* GLOBAL OPCODE TOKENS */
-extern char **op_toks;
+#include <string.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -42,7 +36,6 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/* PRIMARY INTERPRETER FUNCTIONS */
 void free_stack(stack_t **stack);
 int init_stack(stack_t **stack);
 int check_mode(stack_t *stack);
@@ -50,8 +43,6 @@ void free_tokens(void);
 unsigned int token_arr_len(void);
 int run_monty(FILE *script_fd);
 void set_op_tok_error(int error_code);
-
-/* OPCODE FUNCTIONS */
 void monty_push(stack_t **stack, unsigned int line_number);
 void monty_pall(stack_t **stack, unsigned int line_number);
 void monty_pint(stack_t **stack, unsigned int line_number);
@@ -69,12 +60,9 @@ void monty_rotl(stack_t **stack, unsigned int line_number);
 void monty_rotr(stack_t **stack, unsigned int line_number);
 void monty_stack(stack_t **stack, unsigned int line_number);
 void monty_queue(stack_t **stack, unsigned int line_number);
-
-/* CUSTOM STANDARD LIBRARY FUNCTIONS */
+void free_dlistint(stack_t *head);
 char **strtow(char *str, char *delims);
 char *get_int(int n);
-
-/* ERROR MESSAGES & ERROR CODES */
 int usage_error(void);
 int malloc_error(void);
 int f_open_error(char *filename);
@@ -85,5 +73,16 @@ int pint_error(unsigned int line_number);
 int short_stack_error(unsigned int line_number, char *op);
 int div_error(unsigned int line_number);
 int pchar_error(unsigned int line_number, char *message);
+int delete_dnodeint_at_index(stack_t **head, unsigned int index);
+void parse_file(char *filename, stack_t **head);
+char *get_command(char *buffer);
+void (*get_op_func(char *cmd))(stack_t **, unsigned int);
+void op_push(stack_t **head, unsigned int line_number);
+void op_pall(stack_t **head, unsigned int line_number);
+void op_pint(stack_t **head, unsigned int line_number);
+void op_pop(stack_t **head, unsigned int line_number);
+int check_num(char *val);
+void add_dnodeint(stack_t **head, const int n);
+stack_t *add_dnodeint_end(stack_t **head, const int n);
 
 #endif /* __MONTY_H__ */
