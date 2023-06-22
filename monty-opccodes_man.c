@@ -1,5 +1,7 @@
 #include "monty.h"
 
+#define STACK 0
+
 void monty_push(stack_t **stack, unsigned int line_number);
 void monty_pall(stack_t **stack, unsigned int line_number);
 void monty_pint(stack_t **stack, unsigned int line_number);
