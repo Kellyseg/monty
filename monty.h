@@ -36,6 +36,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+#define DELIMS " \t\n"
+
 void free_stack(stack_t **stack);
 int init_stack(stack_t **stack);
 int check_mode(stack_t *stack);
@@ -84,5 +86,6 @@ void op_pop(stack_t **head, unsigned int line_number);
 int check_num(char *val);
 void add_dnodeint(stack_t **head, const int n);
 stack_t *add_dnodeint_end(stack_t **head, const int n);
+extern char **op_toks;
 
 #endif /* __MONTY_H__ */
