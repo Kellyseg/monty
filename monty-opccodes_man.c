@@ -29,6 +29,7 @@ void monty_push(stack_t **stack, unsigned int line_number)
 		return;
 	}
 
+
 	for (i = 0; op_toks[1][i]; i++)
 	{
 		if (op_toks[1][i] == '-' && i == 0)
@@ -41,7 +42,7 @@ void monty_push(stack_t **stack, unsigned int line_number)
 	}
 	new->n = atoi(op_toks[1]);
 
-	if (check_mode(*stack) == STACK) /* STACK mode insert at front */
+	if (check_mode(*stack) == STACK)
 	{
 		tmp = (*stack)->next;
 		new->prev = *stack;
@@ -50,7 +51,7 @@ void monty_push(stack_t **stack, unsigned int line_number)
 			tmp->prev = new;
 		(*stack)->next = new;
 	}
-	else /* QUEUE mode insert at end */
+	else
 	{
 		tmp = *stack;
 		while (tmp->next)
